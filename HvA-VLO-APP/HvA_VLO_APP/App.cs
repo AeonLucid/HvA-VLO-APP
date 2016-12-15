@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using HvA_VLO_APP.Auth;
 using HvA_VLO_APP.Net;
 using HvA_VLO_APP.Views;
@@ -11,8 +10,6 @@ namespace HvA_VLO_APP
     {
         public App()
         {
-            // TODO: Move to onStart() and show a loading screen as default page.
-
             var credentialsManager = DependencyService.Get<CredentialsManagerBase>();
             var isAuthenticated = false;
             Client client = null;

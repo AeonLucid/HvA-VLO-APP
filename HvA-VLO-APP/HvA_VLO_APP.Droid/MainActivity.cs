@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace HvA_VLO_APP.Droid
 {
-    [Activity(Label = "HvA_VLO_APP", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "HvA_VLO_APP", Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -15,7 +15,7 @@ namespace HvA_VLO_APP.Droid
 
             Forms.Init(this, bundle);
             DependencyService.Register<CredentialsManager>();
-
+            
             LoadApplication(new App());
         }
     }
