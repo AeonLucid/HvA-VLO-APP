@@ -1,43 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using HvA_VLO_APP.Views;
 using Xamarin.Forms;
 
 namespace HvA_VLO_APP
 {
 	public class App : Application
 	{
-		public App ()
+		public App()
 		{
-			// The root page of your application
-			MainPage = new ContentPage {
-				Content = new StackLayout {
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
+			MainPage = new NavigationPage(new LoginPage());
 		}
 
-		protected override void OnStart ()
+		protected override void OnStart()
 		{
-			// Handle when your app starts
+			Console.WriteLine("################### ONSTART");
 		}
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
+		protected override void OnSleep()
+        {
+            Console.WriteLine("################### ONSLEEP");
+        }
 
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
+		protected override void OnResume()
+        {
+            Console.WriteLine("################### ONRESUME");
+        }
 	}
 }
