@@ -8,7 +8,6 @@ namespace HvA_VLO_APP.Net
 {
     internal class Client
     {
-
         private readonly CookieContainer _cookieContainer;
 
         private readonly HttpClient _httpClient;
@@ -37,14 +36,14 @@ namespace HvA_VLO_APP.Net
             await _httpClient.GetStringAsync($"{Constants.ChamiloUrl}/index.php");
 
             // Step 2: Login using entered credentials
-            using (var loginResponse = await _httpClient.PostAsync($"{Constants.ChamiloUrl}/index.php", 
+            using (var loginResponse = await _httpClient.PostAsync($"{Constants.ChamiloUrl}/index.php",
                 new FormUrlEncodedContent(
                     new Dictionary<string, string>
                     {
-                        { "login", username },
-                        { "password", password },
-                        { "submitAuth", string.Empty },
-                        { "_qf_formLogin", string.Empty }
+                        {"login", username},
+                        {"password", password},
+                        {"submitAuth", string.Empty},
+                        {"_qf_formLogin", string.Empty}
                     })))
             {
                 var loginResponseText = await loginResponse.Content.ReadAsStringAsync();
@@ -73,6 +72,5 @@ namespace HvA_VLO_APP.Net
                 Console.WriteLine($"\t- {cookie}");
             }
         }
-
     }
 }
