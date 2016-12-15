@@ -1,23 +1,22 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using HvA_VLO_APP.Droid.Auth;
+using Xamarin.Forms;
 
 namespace HvA_VLO_APP.Droid
 {
 	[Activity (Label = "HvA_VLO_APP", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+	public class MainActivity : Xamarin.Forms.Platform.Android.FormsApplicationActivity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
 		{
-			base.OnCreate (bundle);
+			base.OnCreate(bundle);
 
-			global::Xamarin.Forms.Forms.Init (this, bundle);
-			LoadApplication (new HvA_VLO_APP.App ());
+			Forms.Init(this, bundle);
+            DependencyService.Register<CredentialsManager>();
+
+			LoadApplication (new App());
 		}
 	}
 }

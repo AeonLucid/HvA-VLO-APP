@@ -10,8 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Auth\CredentialsManagerBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Net\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\DashboardPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LoginPage.cs" />
   </ItemGroup>
 </Project>

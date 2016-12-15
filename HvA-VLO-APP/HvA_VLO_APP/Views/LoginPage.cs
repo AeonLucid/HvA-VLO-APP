@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using HvA_VLO_APP.Auth;
 using HvA_VLO_APP.Net;
 using Xamarin.Forms;
 
@@ -78,18 +80,21 @@ namespace HvA_VLO_APP.Views
 
         private async void LoginButtonOnClicked(object sender, EventArgs eventArgs)
         {
-            var signIn = await _client.LoginAsync(_usernameEntry.Text, _passwordEntry.Text);
-            if (signIn)
+            var username = _usernameEntry.Text;
+            var password = _passwordEntry.Text;
+
+            var signIn = await _client.LoginAsync(username, password);
+            if (!signIn) return;
+
+            var credentialsManager = DependencyService.Get<CredentialsManagerBase>();
+
+            if (_saveCredentialsSwitch.IsToggled)
             {
-                if (_saveCredentialsSwitch.IsToggled)
-                {
-                    // TODO: Figure out how to securely store credentials.
-                }
+                credentialsManager.StoreAccount(username, password, _client.Cookies);
             }
 
-//            Console.WriteLine($"{_usernameEntry.Text}\n{_passwordEntry.Text}\n{_saveCredentialsSwitch.IsToggled}");
-//            Navigation.InsertPageBefore(new ContentPage(), this);
-//            await Navigation.PopAsync();
+            Navigation.InsertPageBefore(new DashboardPage(_client), this);
+            await Navigation.PopAsync();
         }
     }
 }

@@ -15,5 +15,7 @@
         /// </summary>
         public const string Language = "en";
 
+        public const string ServiceId = "HvA_VLO_APP";
+
     }
 }
