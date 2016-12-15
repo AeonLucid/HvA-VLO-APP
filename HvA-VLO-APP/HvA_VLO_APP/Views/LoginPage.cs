@@ -1,27 +1,23 @@
 ﻿using System;
+using HvA_VLO_APP.Net;
 using Xamarin.Forms;
 
 namespace HvA_VLO_APP.Views
 {
     internal class LoginPage : ContentPage
     {
+        private readonly Client _client;
 
         private readonly Switch _saveCredentialsSwitch;
 
-        private readonly Button _loginButton;
-
         private readonly Entry _usernameEntry, _passwordEntry;
 
-        public LoginPage()
+        public LoginPage(Client client)
         {
+            _client = client;
+
+            // User Interface
             _saveCredentialsSwitch = new Switch();
-
-            _loginButton = new Button
-            {
-                Text = "Login"
-            };
-
-            _loginButton.Clicked += LoginButtonOnClicked;
 
             _usernameEntry = new Entry
             {
@@ -33,6 +29,13 @@ namespace HvA_VLO_APP.Views
                 Placeholder = "Password",
                 IsPassword = true,
             };
+
+            var loginButton = new Button
+            {
+                Text = "Login"
+            };
+
+            loginButton.Clicked += LoginButtonOnClicked;
 
             Content = new StackLayout
             {
@@ -68,17 +71,25 @@ namespace HvA_VLO_APP.Views
                             }
                         }
                     },
-                    _loginButton
+                    loginButton
                 }
             };
         }
 
         private async void LoginButtonOnClicked(object sender, EventArgs eventArgs)
         {
-            Console.WriteLine($"{_usernameEntry.Text}\n{_passwordEntry.Text}\n{_saveCredentialsSwitch.IsToggled}");
+            var signIn = await _client.LoginAsync(_usernameEntry.Text, _passwordEntry.Text);
+            if (signIn)
+            {
+                if (_saveCredentialsSwitch.IsToggled)
+                {
+                    // TODO: Figure out how to securely store credentials.
+                }
+            }
 
-            //            Navigation.InsertPageBefore(new ContentPage(), this);
-            //            await Navigation.PopAsync();
+//            Console.WriteLine($"{_usernameEntry.Text}\n{_passwordEntry.Text}\n{_saveCredentialsSwitch.IsToggled}");
+//            Navigation.InsertPageBefore(new ContentPage(), this);
+//            await Navigation.PopAsync();
         }
     }
 }

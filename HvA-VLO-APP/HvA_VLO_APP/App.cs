@@ -1,4 +1,5 @@
 ﻿using System;
+using HvA_VLO_APP.Net;
 using HvA_VLO_APP.Views;
 using Xamarin.Forms;
 
@@ -6,9 +7,13 @@ namespace HvA_VLO_APP
 {
 	public class App : Application
 	{
-		public App()
+	    public App()
 		{
-			MainPage = new NavigationPage(new LoginPage());
+            var client = new Client();
+
+            // TODO: Some logic to retrieve old cookies.
+
+            MainPage = new NavigationPage(new LoginPage(client));
 		}
 
 		protected override void OnStart()
