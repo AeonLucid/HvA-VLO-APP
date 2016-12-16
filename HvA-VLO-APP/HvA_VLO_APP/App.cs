@@ -52,16 +52,9 @@ namespace HvA_VLO_APP
             }
 
             // Check if authenticated.
-            if (isAuthenticated)
-            {
-                // Show dashboard
-                MainPage = new NavigationPage(new DashboardPage(client));
-            }
-            else
-            {
-                // Show login screen 
-                MainPage = new NavigationPage(new LoginPage(client));
-            }
+            MainPage = isAuthenticated ? 
+                new NavigationPage(new DashboardPage(client)) : 
+                new NavigationPage(new LoginPage(client));
         }
 
         protected override void OnStart()

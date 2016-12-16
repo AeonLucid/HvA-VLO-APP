@@ -145,9 +145,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\IconWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <Import Project="..\HvA_VLO_APP\HvA_VLO_APP.projitems" Label="Shared" Condition="Exists('..\HvA_VLO_APP\HvA_VLO_APP.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
