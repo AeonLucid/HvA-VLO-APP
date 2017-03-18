@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VloApp.Views.LoginPage"
+             Title="Login">
+    <StackLayout Orientation="Vertical"
+                 VerticalOptions="CenterAndExpand"
+                 HorizontalOptions="CenterAndExpand">
+        <Label Text="HBO-ICT VLO"
+               FontSize="30"
+               HorizontalOptions="Center"/>
+        <Label Text="Username"/>
+        <Entry Placeholder="Username"
+               Text="{Binding Username}"/>
+        <Label Text="Password"/>
+        <Entry Placeholder="Password"
+               IsPassword="True"
+               Text="{Binding Password}"/>
+        <StackLayout Orientation="Horizontal">
+            <Switch IsToggled="{Binding SaveCredentials}"/>
+            <Label VerticalTextAlignment="Center"
+                   Text="Deze gegevens onthouden"/>
+        </StackLayout>
+        <Button Text="Login"
+                Clicked="Login_OnClicked"/>
+    </StackLayout>
+</ContentPage>

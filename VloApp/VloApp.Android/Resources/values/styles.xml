@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<style name="MyTheme" parent="MyTheme.Base">
+	</style>
+	<!-- Base theme applied no matter what API -->
+	<style name="MyTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+		<!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
+		<item name="windowNoTitle">true</item>
+		<!--We will be using the toolbar so no need to show ActionBar-->
+		<item name="windowActionBar">false</item>
+    <!-- ResourceDictionary.Primary -->
+		<item name="colorPrimary">#2196F3</item>
+    <!-- ResourceDictionary.PrimaryDark -->
+		<item name="colorPrimaryDark">#1976D2</item>
+		<!-- ResourceDictionary.Accent -->
+		<item name="colorAccent">#96D1FF</item>
+		<item name="windowActionModeOverlay">true</item>
+		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+	</style>
+	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+    <!-- ResourceDictionary.Accent -->
+		<item name="colorAccent">#96D1FF</item>
+	</style>
+</resources>
