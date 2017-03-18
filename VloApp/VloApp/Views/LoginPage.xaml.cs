@@ -14,14 +14,14 @@ namespace VloApp.Views
 
 	    public LoginPageModel ViewModel;
 
-		public LoginPage(VloClient client, CredentialsManagerBase credentialsManager)
+		public LoginPage(VloClient client)
 		{
 		    _client = client;
-		    _credentialsManager = credentialsManager;
+		    _credentialsManager = DependencyService.Get<CredentialsManagerBase>();
 
 		    InitializeComponent();
 		    BindingContext = ViewModel = new LoginPageModel();
-        }
+		}
         
         private async void Login_OnClicked(object sender, EventArgs e)
 	    {
@@ -33,8 +33,7 @@ namespace VloApp.Views
                 _credentialsManager.StoreAccount(ViewModel.Username, ViewModel.Password, _client.Cookies);
             }
 
-            Navigation.InsertPageBefore(new DashboardPage(_client), this);
-            await Navigation.PopAsync();
-        }
+	        Application.Current.MainPage = App.RootPage;
+	    }
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using VloApp.Services;
 using VloApp.Views;
-
+using VloApp.Views.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,20 +9,20 @@ namespace VloApp
 {
 	public partial class App : Application
 	{
+
         public App()
 		{
 			InitializeComponent();
 
             var credentialsManager = DependencyService.Get<CredentialsManagerBase>();
             var isAuthenticated = false;
-		    VloClient client = null;
 
             // First try, cookies.
             if (credentialsManager.Cookies != null)
             {
-                client = new VloClient(credentialsManager.Username, credentialsManager.Cookies);
+                Client = new VloClient(credentialsManager.Username, credentialsManager.Cookies);
 
-                if (client.IsLoggedIn())
+                if (Client.IsLoggedIn())
                 {
                     isAuthenticated = true;
                 }
@@ -32,7 +32,7 @@ namespace VloApp
             if (!isAuthenticated)
             {
                 // create a new client.
-                client = new VloClient();
+                Client = new VloClient();
 
                 // Second try, reauthentication
                 var username = credentialsManager.Username;
@@ -40,11 +40,11 @@ namespace VloApp
 
                 if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
                 {
-                    if (client.Login(username, password))
+                    if (Client.Login(username, password))
                     {
                         isAuthenticated = true;
 
-                        credentialsManager.StoreAccount(username, password, client.Cookies);
+                        credentialsManager.StoreAccount(username, password, Client.Cookies);
                     }
                     else
                     {
@@ -54,10 +54,41 @@ namespace VloApp
                 }
             }
 
-            // Set main page
-            Current.MainPage = isAuthenticated ? 
-                new NavigationPage(new DashboardPage(client)) : 
-                new NavigationPage(new LoginPage(client, credentialsManager));
+            // Set properties
+		    NavigationPage = new NavigationPage(new DashboardPage(Client));
+		    RootPage = new RootPage
+		    {
+		        Master = new MenuPage(),
+		        Detail = NavigationPage
+		    };
+
+            // Set the main page
+            if (!isAuthenticated)
+            {
+                Current.MainPage = new LoginPage(Client);
+            }
+            else
+            {
+                Current.MainPage = RootPage;
+            }
+        }
+
+        private VloClient Client { get; }
+
+        public static RootPage RootPage { get; private set; }
+
+	    public static NavigationPage NavigationPage { get; private set; }
+
+        public static bool MenuIsPresented
+        {
+            get
+            {
+                return RootPage.IsPresented;
+            }
+            set
+            {
+                RootPage.IsPresented = value;
+            }
         }
 	}
 }
