@@ -5,14 +5,14 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace VloApp
 {
-	public partial class App : Application
-	{
-
+    public partial class App : Application
+    {
         public App()
-		{
-			InitializeComponent();
+        {
+            InitializeComponent();
 
             var credentialsManager = DependencyService.Get<CredentialsManagerBase>();
             var isAuthenticated = false;
@@ -55,12 +55,12 @@ namespace VloApp
             }
 
             // Set properties
-		    NavigationPage = new NavigationPage(new DashboardPage(Client));
-		    RootPage = new RootPage
-		    {
-		        Master = new MenuPage(),
-		        Detail = NavigationPage
-		    };
+            NavigationPage = new NavigationPage(new DashboardPage(Client));
+            RootPage = new RootPage
+            {
+                Master = new MenuPage(),
+                Detail = NavigationPage
+            };
 
             // Set the main page
             if (!isAuthenticated)
@@ -77,18 +77,12 @@ namespace VloApp
 
         public static RootPage RootPage { get; private set; }
 
-	    public static NavigationPage NavigationPage { get; private set; }
+        public static NavigationPage NavigationPage { get; private set; }
 
         public static bool MenuIsPresented
         {
-            get
-            {
-                return RootPage.IsPresented;
-            }
-            set
-            {
-                RootPage.IsPresented = value;
-            }
+            get { return RootPage.IsPresented; }
+            set { RootPage.IsPresented = value; }
         }
-	}
+    }
 }

@@ -10,7 +10,9 @@ namespace VloApp.Services
     {
         private readonly HttpClient _httpClient;
 
-        public VloClient() : this(null, new CookieContainer()) { }
+        public VloClient() : this(null, new CookieContainer())
+        {
+        }
 
         public VloClient(string username, CookieContainer cookieContainer)
         {
